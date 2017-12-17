@@ -29,5 +29,16 @@ module RailsBestPractice
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.time_zone = 'Beijing'
+    config.active_record.default_timezone = :local
+
+    # cors
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins (ENV['CORS_HOSTS'] ? ENV['CORS_HOSTS'].split(',') : '*')
+        resource '*', headers: :any, methods: :any, credentials: false, expose: %w(access-token expiry token-type uid client)
+      end
+    end
   end
 end
