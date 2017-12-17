@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
+  include CustomResource::Resource
   around_action :set_thread_current_actor
 
   private
 
-  def set_thread_current_user
+  def set_thread_current_actor
     Current.actor = current_user
     yield
   ensure
