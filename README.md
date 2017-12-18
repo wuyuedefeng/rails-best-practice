@@ -29,3 +29,7 @@ setAuthInfo (state, authInfo) {
   state.authInfo = authInfoTmp
 }
 ```
+### 生成项目doc
+```
+sdoc projectdir
+```
