@@ -26,6 +26,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'devise_token_auth'
 
+# Excel write and read
+gem 'rubyXL'
+
 # Form object decoupled from models.
 gem 'reform'
 gem 'reform-rails'
