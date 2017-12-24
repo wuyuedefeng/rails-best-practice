@@ -33,3 +33,40 @@ setAuthInfo (state, authInfo) {
 ```
 sdoc projectdir
 ```
+
+### doc Excel
+```
+path = Utils::Excel.export_excel(@users, User)
+send_file(path)
+```
+api js get file download [axios]
+```
+uploadUsersExcel: (data) => instance.post('/users/upload_users_excel', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+downloadUsersExcel: (params) => instance.get('/users/users_excel', {params, responseType: 'arraybuffer'}),
+```
+fileDownload module
+```
+module.exports = function (data, filename, mime) {
+  var blob = new Blob([data], {type: mime || 'application/octet-stream'})
+  if (typeof window.navigator.msSaveBlob !== 'undefined') {
+    window.navigator.msSaveBlob(blob, filename)
+  } else {
+    let blobURL = window.URL.createObjectURL(blob)
+    let tempLink = document.createElement('a')
+    tempLink.style.display = 'none'
+    tempLink.href = blobURL
+    tempLink.setAttribute('download', filename)
+    tempLink.setAttribute('target', '_blank')
+    document.body.appendChild(tempLink)
+    tempLink.click()
+    document.body.removeChild(tempLink)
+    window.URL.revokeObjectURL(blobURL)
+  }
+}
+```
+使用
+```
+this.api.getUsersExcel(this.$route.query).then(res => {
+  fileDownload(res.data, 'users.xlsx')
+})
+``` 

@@ -18,6 +18,10 @@ Bundler.require(*Rails.groups)
 
 module RailsBestPractice
   class Application < Rails::Application
+    config.before_configuration do
+      # 這裡會自動依據你的 Rails.env 來讀取，不需要自己取出
+      $env = config_for(:application).freeze if File.exists?(Rails.root.join('config', 'application.yml'))
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 

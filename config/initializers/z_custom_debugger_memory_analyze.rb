@@ -37,7 +37,7 @@ module Custom
         # third dumps but not in the first.
         File.open("log/dumps/#{files[1]}", "r").each_line do |line|
           parsed = JSON.parse(line)
-          if parsed && parsed["address"] && !(parsed["address"] =~ /[rvm|rbenv|custom\_debugger\_memory\_analyze]/)
+          if parsed && parsed["address"] && !(parsed["address"] =~ /[custom\_debugger\_memory\_analyze]/)
             if !first_addrs.include?(parsed["address"]) && third_addrs.include?(parsed["address"])
               diff << parsed
             end
@@ -85,6 +85,7 @@ if Dir['log/dumps'] && Rails.env.development?
         sleep 10 * 60 if i != 2
       end
       Custom::Debugger::MemoryAnalyze.new.analyze_files(files)
+      p "========== delete Process #{Process.pid} dump files ========="
       files.each do |file|
         FileUtils.rm_rf(Dir.glob("log/dumps/#{file}"))
       end
