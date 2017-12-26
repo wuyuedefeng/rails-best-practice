@@ -4,6 +4,7 @@ class Admin < ApplicationRecord
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable#, :omniauthable
   include DeviseTokenAuth::Concerns::User
+  include Remarkable
   include Footprintable
   has_footprint
 end

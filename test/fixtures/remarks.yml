@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  trackable: one
+  trackable_type: Trackable
+  actor: one
+  actor_type: Actor
+
+two:
+  text: MyString
+  trackable: two
+  trackable_type: Trackable
+  actor: two
+  actor_type: Actor

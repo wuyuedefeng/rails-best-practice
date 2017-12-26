@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217063750) do
+ActiveRecord::Schema.define(version: 20171226092525) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider", default: "email", null: false
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 20171217063750) do
     t.datetime "updated_at", null: false
     t.index ["actor_type", "actor_id"], name: "index_footprints_on_actor_type_and_actor_id"
     t.index ["trackable_type", "trackable_id"], name: "index_footprints_on_trackable_type_and_trackable_id"
+  end
+
+  create_table "remarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "text"
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.string "actor_type"
+    t.bigint "actor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_type", "actor_id"], name: "index_remarks_on_actor_type_and_actor_id"
+    t.index ["trackable_type", "trackable_id"], name: "index_remarks_on_trackable_type_and_trackable_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

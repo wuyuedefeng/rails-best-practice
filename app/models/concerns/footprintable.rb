@@ -28,7 +28,7 @@ module Footprintable
         end
       end
       # instance methods
-      def create_footprint action
+      def create_footprint action, opt = {}
         attrs_changed = previous_changes
         return if attrs_changed.empty?
         attrs_changed = attrs_changed.extract! *self.class.footprint_options[:extract] if self.class.footprint_options[:extract].present?
@@ -41,7 +41,7 @@ module Footprintable
           attrs_before.store(k, v.first) unless v.first.nil?
           attrs_after.store(k, v.last)  unless v.last.nil?
         end
-        self.footprints << Footprint.new(before: attrs_before, after: attrs_after, action: action, actor: Current.actor || self)
+        self.footprints << Footprint.new(before: attrs_before, after: attrs_after, action: action, actor: opt[:actor] || Current.actor)
       end
     end
   end
